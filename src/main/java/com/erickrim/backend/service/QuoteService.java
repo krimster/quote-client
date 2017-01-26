@@ -40,13 +40,12 @@ public class QuoteService {
     public void getQuote() {
 
         Quote quote = restTemplate.getForObject(quoteUrl, Quote.class);
-        LOG.info("The fetched quote is {}" , quote.toString());
 
         QuoteLine savedQuoteLine = valueRepository.findOne(quote.getValue().getId());
 
         if (savedQuoteLine == null) {
             quoteRepository.save(quote);
-            LOG.info("The saved quote is {}" , quote.toString());
+            LOG.info("Saved quote  {}" , quote.toString());
         }
     }
 
